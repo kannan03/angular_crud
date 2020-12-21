@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import  { HttpClient } from '@angular/common/http';
+import { ItemsService } from '../service/items.service';
 import $ from "jquery";
 declare var jQuery: any;
 
@@ -15,9 +16,10 @@ export class RegisterComponent implements OnInit {
   submitted : boolean = false;
   resultdata:any;
   status_name : any = '' ;
+  itemData : any = [];
   
-   constructor(private http: HttpClient,private formBuilder: FormBuilder ) {  }
-  ngOnInit() {  
+   constructor(private http: HttpClient,private formBuilder: FormBuilder ,private itemHttp: ItemsService ) {  }
+   ngOnInit() {  
      this.registerForm = this.formBuilder.group({
        title: ['', Validators.required],
        firstName: ['', Validators.required],
@@ -26,8 +28,19 @@ export class RegisterComponent implements OnInit {
        acceptTerms: [false, Validators.requiredTrue]
      });
 
+      this.itemHttp.getItem().subscribe( async data => {
+         this.itemData = data;
+         console.log(data);
+     })
+
+
+
+    //  this.itemData = await this.itemHttp.getItem();
+    //  console.log(this.itemHttp);
+    //  console.log('hello kannana');
+
        //   http get module  
-//     this.http.get('http://localhost:3002/').subscribe(data => {
+//     this.http.get('http://localhost:4545/').subscribe(data => {
 //       this.resultdata = data;
 //           console.log(data);
 //     // alert(this.resultdata);
@@ -38,9 +51,10 @@ export class RegisterComponent implements OnInit {
 get  f() { return this.registerForm.controls;
 }
 
+
 handleChange() {
         let vvv = this.registerForm.get('firstName').value;
-        alert(vvv);
+        // alert(vvv);
 }
 
 onSubmit() {

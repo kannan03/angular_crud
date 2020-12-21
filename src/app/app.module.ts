@@ -12,6 +12,7 @@ import { UploadComponent } from './upload/upload.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ContactsComponent } from './contacts/contacts.component';
+import { TestingComponent } from './testing.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ContactsComponent } from './contacts/contacts.component';
     FileuploadComponent,
     UploadComponent,
     NotfoundComponent,
-    ContactsComponent
+    ContactsComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { ContactsComponent } from './contacts/contacts.component';
       { path :'upload', component:UploadComponent },
       { path :'contact', component:ContactsComponent },
       { path :'file', component:FileuploadComponent },
+      { path :'ttt', component: TestingComponent },
       { path :'**', component: NotfoundComponent }
     ])
   ],
